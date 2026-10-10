@@ -1,0 +1,11 @@
+{
+  "name": "@dewclient/shared",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "scripts": {
+    "test": "node --test tests/**/*.test.js"
+  }
+}

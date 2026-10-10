@@ -1,0 +1,105 @@
+{
+  "name": "@dewclient/client",
+  "productName": "DewClient",
+  "version": "1.0.1",
+  "description": "Production-grade Minecraft Java Edition Launcher",
+  "main": "dist-electron/main.mjs",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "start": "npm run build && node scripts/start.mjs",
+    "build:frontend": "vite build",
+    "build:electron": "node scripts/build-electron.mjs",
+    "build": "npm run build:frontend && npm run build:electron",
+    "build:cosmetics": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\DewCosmeticsLoader\\build-all.ps1",
+    "dist": "npm run build:cosmetics && npm run build && electron-builder --win --x64",
+    "package:win": "npm run dist",
+    "typecheck": "tsc --noEmit",
+    "build:website": "esbuild website/src/main.ts --bundle --outfile=website/js/main.js --format=iife --target=es2020",
+    "build:website:prod": "node scripts/build-website.mjs",
+    "serve:website": "python -m http.server 3000 -d website",
+    "server": "node server/src/index.mjs",
+    "build:server": "node scripts/build-server.mjs",
+    "build:source": "node scripts/build-source-archive.mjs",
+    "bootstrap-admin": "npm --prefix server run bootstrap-admin",
+    "test": "node --test tests/client.test.mjs tests/cosmetics-sync.test.mjs tests/admin-auth.test.mjs tests/dew-account-auth.test.mjs tests/dew-cosmetics-session.test.mjs tests/dew-cosmetics-bridge.test.mjs tests/launcher-data-reset.test.mjs tests/navigation-policy.test.mjs shared/tests/shared.test.js shared/tests/cosmetics-protocol.test.js"
+  },
+  "build": {
+    "appId": "com.dewclient.launcher",
+    "productName": "DewClient",
+    "protocols": [
+      {
+        "name": "DewClient Discord sign-in",
+        "schemes": [
+          "dewclient"
+        ]
+      }
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "icon/**/*",
+      "DewCosmeticsLoader/versions.json",
+      "DewCosmeticsLoader/output-jars/*.jar",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "icon/DewClient.ico",
+        "to": "icon/DewClient.ico"
+      }
+    ],
+    "win": {
+      "icon": "icon/DewClient.ico",
+      "executableName": "DewClient",
+      "signAndEditExecutable": true,
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "dir",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "DewClient",
+      "installerIcon": "icon/DewClient.ico",
+      "uninstallerIcon": "icon/DewClient.ico",
+      "installerHeaderIcon": "icon/DewClient.ico"
+    }
+  },
+  "dependencies": {
+    "@azure/msal-node": "^7.0.0",
+    "adm-zip": "^0.6.1",
+    "lucide-react": "^1.48.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "skinview3d": "^3.4.2"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.5",
+    "@types/node": "^20.14.9",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "electron": "^31.0.2",
+    "electron-builder": "^24.13.3",
+    "esbuild": "^0.21.5",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
+  }
+}

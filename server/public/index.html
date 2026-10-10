@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="theme-color" content="#0c1210">
+  <title>DewClient - Central Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/dashboard.css?v=1.0.1-r1">
+  <link rel="icon" href="/favicon.ico?v=brand-20261007" type="image/x-icon">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. RESTRICTED ADMIN LOGIN SCREEN (Email + Password)
+       ========================================================================= -->
+  <div id="login-screen">
+    <div class="login-card">
+      <div class="login-brand-icon"><img src="/favicon.ico?v=brand-20261007" alt="DewClient logo"></div>
+      <h2 class="login-title">DewClient</h2>
+      <span class="login-badge">Restricted Access</span>
+      <p class="login-description">
+        Central Management & Telemetry Portal.<br>
+        Authorized staff only. Sign in with your admin email and password.
+      </p>
+
+      <div class="login-error-msg" id="login-error"></div>
+
+      <form id="login-form" class="login-form" autocomplete="on">
+        <label class="field-label" for="admin-email">Admin Email</label>
+        <input id="admin-email" name="email" type="email" placeholder="admin@dewclient.fun" autocomplete="email" required>
+
+        <label class="field-label" for="admin-password">Password</label>
+        <input id="admin-password" name="password" type="password" placeholder="Enter admin password" autocomplete="current-password" required>
+
+        <button type="submit" class="btn-google" id="btn-admin-login">
+          <span>Sign In</span>
+        </button>
+      </form>
+
+      <div class="login-footer-notice">
+        Local admin authentication via email + password
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+      2. PROTECTED ADMIN DASHBOARD (Visible exclusively after admin sign-in)
+       ========================================================================= -->
+  <div id="app-dashboard">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon"><img src="/favicon.ico?v=brand-20261007" alt="DewClient logo"></div>
+        <div class="brand-text">
+          <h1>DewClient</h1>
+          <span class="brand-badge">Central Server</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <a class="nav-item active" href="#panel-overview" aria-current="page" data-tab="overview" data-permission="accounts:read">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Overview & Accounts
+        </a>
+        <a class="nav-item" href="#panel-clients" data-tab="clients" data-permission="clients:read">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16v10H4z M2 18h20v2H2z"/></svg>
+          Connected Clients
+        </a>
+        <a class="nav-item" href="#panel-servers" data-tab="servers" data-permission="content:manage">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zm0 6h16v4H4zm0 6h16v4H4z"/></svg>
+          Featured Servers
+        </a>
+        <a class="nav-item" href="#panel-news" data-tab="news" data-permission="content:manage">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12z"/></svg>
+          News & Updates
+        </a>
+        <a class="nav-item" href="#panel-releases" data-tab="releases" data-permission="releases:manage">
+          <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18-5 5h3v7h4V7h3l-5-5z"/></svg>
+          Downloads & Releases
+        </a>
+        <a class="nav-item" href="#panel-cosmetics" data-tab="cosmetics" data-permission="cosmetics:read">
+          <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v1H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3V5a3 3 0 0 0-3-3zm-1 4V5a1 1 0 0 1 2 0v1z"/></svg>
+          Cosmetic Library
+        </a>
+        <a class="nav-item" href="#panel-bug-reports" data-tab="bug-reports" data-permission="dashboard:read">
+          <svg viewBox="0 0 24 24"><path d="M12 3a4 4 0 0 0-4 4v1H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-2V7a4 4 0 0 0-4-4zm-2 5V7a2 2 0 1 1 4 0v1zm2 4a2 2 0 0 1 1 3.73V18h-2v-2.27A2 2 0 0 1 12 12z"/></svg>
+          Bug Reports
+        </a>
+        <a class="nav-item" href="#panel-system" data-tab="system" data-permission="dashboard:read">
+          <svg viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 13 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L3.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66z"/></svg>
+          System & Storage
+        </a>
+        <a class="nav-item" href="#panel-staff" data-tab="staff">
+          <svg viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0zm-4 6c-4.4 0-8 2.1-8 4v1h16v-1c0-1.9-3.6-4-8-4zm6-9v2h2v2h2v-2h2v-2h-2V6h-2v2z"/></svg>
+          Admin Accounts
+        </a>
+      </nav>
+
+      <!-- Authenticated User Profile -->
+      <div class="user-profile-badge">
+        <img class="user-avatar" id="admin-avatar" src="https://mc-heads.net/avatar/DewClient/32" alt="Avatar">
+        <div class="user-details">
+          <div class="user-name" id="admin-name">Admin</div>
+          <div class="user-email" id="admin-profile-email">admin@dewclient.fun</div>
+        </div>
+        <button class="btn-signout" id="btn-signout" title="Sign Out">✕</button>
+      </div>
+
+      <div class="server-status-pill">
+        <div class="pulse-dot"></div>
+        <div class="status-info">
+          <span class="status-label">Network Relay</span>
+          <span class="status-val" id="network-status">Checking database</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <main class="main-wrapper">
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="header-title">
+          <h2>DewClient Central Management</h2>
+          <p>Live account telemetry, remote launcher manifest & cosmetics network</p>
+        </div>
+        <div class="header-actions">
+          <span class="badge badge-online" id="storage-status">CHECKING DATABASE</span>
+          <button id="theme-toggle" class="btn btn-secondary theme-toggle" type="button" aria-label="Switch to white theme">☼</button>
+          <a href="https://dewclient.fun" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">🌐 Official Website</a>
+        </div>
+      </header>
+
+      <!-- Key Metrics Grid -->
+      <section class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon icon-emerald">👤</div>
+          <div class="metric-info">
+            <h3>Total Accounts</h3>
+            <div class="metric-val" id="stat-accounts">0</div>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon icon-cyan">💻</div>
+          <div class="metric-info">
+            <h3>Online Clients</h3>
+            <div class="metric-val" id="stat-online">0 / 0</div>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon icon-amber">⚡</div>
+          <div class="metric-info">
+            <h3>Featured Servers</h3>
+            <div class="metric-val" id="stat-servers">0</div>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon icon-purple">✨</div>
+          <div class="metric-info">
+            <h3>Cosmetics Synced</h3>
+            <div class="metric-val" id="stat-cosmetics">0</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 1: Overview & Player Accounts -->
+      <section class="tab-panel active" id="panel-overview" data-permission="accounts:read">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <span>🎮</span>
+              <span>Registered Player Accounts</span>
+            </div>
+            <input type="text" class="search-input" id="account-search" placeholder="Search by player or UUID...">
+          </div>
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Minecraft Player</th>
+                  <th>Auth Type</th>
+                  <th>Client Hardware ID</th>
+                  <th>Last Active</th>
+                  <th>Cosmetics</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="accounts-tbody">
+                <tr>
+                  <td colspan="6" style="text-align: center; color: var(--text-dim); padding: 30px;">Loading accounts from Supabase...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="account-pagination" style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px"></div>
+        </div>
+      </section>
+
+      <!-- TAB 2: Connected Clients -->
+      <section class="tab-panel" id="panel-clients" data-permission="clients:read">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <span>🖥️</span>
+              <span>Client Hardware Installations</span>
+            </div>
+          </div>
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Client ID</th>
+                  <th>Operating System</th>
+                  <th>Launcher Version</th>
+                  <th>Status</th>
+                  <th>Last Heartbeat</th>
+                </tr>
+              </thead>
+              <tbody id="clients-tbody">
+                <tr>
+                  <td colspan="5" style="text-align: center; color: var(--text-dim); padding: 30px;">Loading clients from Supabase...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: Featured Servers -->
+      <section class="tab-panel" id="panel-servers" data-permission="content:manage">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <span>🌐</span>
+              <span>Featured Minecraft Servers</span>
+            </div>
+            <button class="btn btn-primary" id="btn-add-server">+ Add Featured Server</button>
+          </div>
+          <div class="servers-grid" id="servers-grid">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: News & Announcements -->
+      <section class="tab-panel" id="panel-news" data-permission="content:manage">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <span>📰</span>
+              <span>Launcher News & Patch Notes</span>
+            </div>
+            <button class="btn btn-primary" id="btn-add-news">+ Post New Update</button>
+          </div>
+          <div id="news-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span>📣</span><span>Player Announcements</span></div>
+          </div>
+          <form id="form-announcement">
+            <div class="form-group"><label for="announcement-title">Title</label><input type="text" class="form-input" id="announcement-title" maxlength="120" required></div>
+            <div class="form-group"><label for="announcement-message">Message</label><textarea class="form-input" id="announcement-message" rows="3" maxlength="1000" required></textarea></div>
+            <div class="form-group"><label for="announcement-severity">Severity</label><select class="form-input" id="announcement-severity"><option value="info">Information</option><option value="warning">Warning</option><option value="critical">Critical</option></select></div>
+            <div class="form-group"><label for="announcement-priority">Priority</label><input type="number" class="form-input" id="announcement-priority" min="0" max="1000" value="10"></div>
+            <div class="form-group"><label for="announcement-url">Optional link</label><input type="url" class="form-input" id="announcement-url" placeholder="https://dewclient.fun/..."></div>
+            <div id="announcement-status" role="status" aria-live="polite" style="color: var(--text-muted); font-size: 13px; margin-bottom: 14px;"></div>
+            <button class="btn btn-primary" id="btn-publish-announcement" type="submit">Publish announcement</button>
+          </form>
+          <div id="announcement-list" style="margin-top: 18px;">Loading announcements...</div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span>🛠</span><span>Maintenance Mode</span></div>
+            <span class="badge badge-online" id="maintenance-status">Disabled</span>
+          </div>
+          <form id="form-maintenance">
+            <div class="form-group"><label><input type="checkbox" id="maintenance-enabled"> Enable maintenance mode</label></div>
+            <div class="form-group"><label for="maintenance-mode">Behavior</label><select class="form-input" id="maintenance-mode"><option value="soft">Soft: show a notice</option><option value="hard">Hard: block game launches</option></select></div>
+            <div class="form-group"><label for="maintenance-title">Title</label><input type="text" class="form-input" id="maintenance-title" maxlength="120"></div>
+            <div class="form-group"><label for="maintenance-message">Message</label><textarea class="form-input" id="maintenance-message" rows="3" maxlength="1000"></textarea></div>
+            <div id="maintenance-form-status" role="status" aria-live="polite" style="color: var(--text-muted); font-size: 13px; margin-bottom: 14px;"></div>
+            <button class="btn btn-primary" id="btn-save-maintenance" type="submit">Save maintenance settings</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- TAB 5: Client Downloads & Releases -->
+      <section class="tab-panel" id="panel-releases" data-permission="releases:manage">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <span>⬇</span>
+              <span>Windows Client Release</span>
+            </div>
+            <span class="badge badge-microsoft" id="release-current-version">Current: loading...</span>
+          </div>
+          <div id="release-current-details" style="color: var(--text-muted); font-size: 13px; margin: 0 0 20px;">Loading published release...</div>
+          <form id="form-release">
+            <div class="form-group">
+              <label for="release-version">New version</label>
+              <input type="text" class="form-input" id="release-version" placeholder="1.0.1" pattern="v?\\d+\\.\\d+\\.\\d+([+-][A-Za-z0-9.-]+)?" required>
+            </div>
+            <div class="form-group">
+              <label for="release-minimum-version">Minimum supported version</label>
+              <input type="text" class="form-input" id="release-minimum-version" value="1.0.0" placeholder="1.0.0" pattern="v?\\d+\\.\\d+\\.\\d+([+-][A-Za-z0-9.-]+)?" required>
+            </div>
+            <div class="form-group">
+              <label for="release-notes-url">Release notes URL</label>
+              <input type="url" class="form-input" id="release-notes-url" placeholder="https://dewclient.fun/#download">
+            </div>
+            <div class="form-group">
+              <label for="release-installer">Windows installer (.exe, max 2 GiB)</label>
+              <input type="file" class="form-input" id="release-installer" accept=".exe,application/vnd.microsoft.portable-executable" required>
+            </div>
+            <div id="release-upload-status" role="status" aria-live="polite" style="color: var(--text-muted); font-size: 13px; margin-bottom: 14px;"></div>
+            <div class="modal-actions">
+              <button type="submit" class="btn btn-primary" id="btn-publish-release">Upload & Publish Release</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="panel-cosmetics" data-permission="cosmetics:read">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><span>✨</span><span>Private Cosmetic Library</span></div>
+          </div>
+          <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 18px;">
+            Upload PNG textures here. Files stay byte-for-byte unchanged and private until assigned. Skins, capes, and wings must use valid Minecraft UV layouts from 64×32 up to 2048×1024; uploads are limited to 50 MiB.
+          </p>
+          <form id="form-cosmetic-library" data-permission="cosmetics:manage">
+            <div class="form-group">
+              <label for="library-cosmetic-name">Cosmetic name</label>
+              <input type="text" class="form-input" id="library-cosmetic-name" maxlength="64" required>
+            </div>
+            <div class="form-group">
+              <label for="library-cosmetic-kind">Type</label>
+              <select class="form-input" id="library-cosmetic-kind" required>
+                <option value="skin">Skin</option>
+                <option value="cape">Cape</option>
+                <option value="elytra">Elytra texture</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="library-cosmetic-file">PNG texture (max 50 MiB)</label>
+              <input type="file" class="form-input" id="library-cosmetic-file" accept="image/png,.png" required>
+            </div>
+            <div id="cosmetic-library-status" role="status" aria-live="polite" style="color: var(--text-muted); font-size: 13px; margin-bottom: 14px;"></div>
+            <div class="modal-actions"><button type="submit" class="btn btn-primary" id="btn-upload-library-cosmetic">Upload to Private Library</button></div>
+          </form>
+        </div>
+        <div class="card" data-permission="cosmetics:manage">
+          <div class="card-header"><div class="card-title"><span>🎮</span><span>Assign by Username or UUID</span></div></div>
+          <div class="form-group">
+            <label for="cosmetic-target-identifier">Player username or UUID</label>
+            <input type="text" class="form-input" id="cosmetic-target-identifier" maxlength="36" placeholder="Minecraft username or UUID">
+          </div>
+          <button type="button" class="btn btn-secondary" id="btn-open-cosmetic-target">Choose cosmetics for player</button>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title"><span>📦</span><span>Uploaded Cosmetics</span></div></div>
+          <div id="cosmetic-library-list" style="color: var(--text-muted); font-size: 13px;">Loading private library...</div>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="panel-bug-reports" data-permission="dashboard:read">
+        <div class="card bug-report-panel">
+          <div class="card-header bug-report-toolbar">
+            <div class="card-title"><span>Bug Reports</span><span>Review player-submitted issues and update their status.</span></div>
+            <div class="bug-report-controls">
+              <label class="sr-only" for="bug-report-filter">Filter reports</label>
+              <select class="form-input" id="bug-report-filter">
+                <option value="all">All reports</option>
+                <option value="pending">Pending</option>
+                <option value="reviewing">Under review</option>
+                <option value="resolved">Resolved</option>
+              </select>
+              <button class="btn btn-secondary" type="button" id="btn-refresh-bug-reports">Refresh</button>
+            </div>
+          </div>
+          <p class="bug-report-privacy">Reports contain only the text players submit and public app/game versions. Client logs and credentials are not attached.</p>
+          <div id="bug-report-status" role="status" aria-live="polite"></div>
+          <div class="bug-report-list" id="bug-report-list">Open this section to load reports.</div>
+        </div>
+      </section>
+
+      <!-- TAB 6: System & Storage -->
+      <section class="tab-panel" id="panel-system" data-permission="dashboard:read">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <span>🗄️</span>
+              <span>Supabase Cloud Architecture</span>
+            </div>
+          </div>
+          <div style="font-size: 14px; line-height: 1.7; color: var(--text-muted); max-width: 800px;">
+            <p style="margin-bottom: 14px;">
+              This backend is connected directly to your <strong style="color: #fff;">Supabase PostgreSQL Database</strong>.
+            </p>
+            <div style="background: rgba(0, 230, 153, 0.05); border: 1px solid rgba(0, 230, 153, 0.2); border-radius: var(--radius-md); padding: 18px; margin-bottom: 20px;">
+              <h4 style="color: var(--primary); margin-bottom: 8px;">Active Supabase Tables:</h4>
+              <ul style="margin-left: 20px; font-family: monospace; font-size: 13px;">
+                <li><strong>dew_clients</strong>: Stores client hardware instances and online presence</li>
+                <li><strong>dew_accounts</strong>: Stores all player accounts, usernames, and avatars</li>
+                <li><strong>dew_manifest</strong>: Remote configuration (servers, news, versioning)</li>
+                <li><strong>dew_cosmetics</strong>: Synchronized player skins, capes, and profile metadata</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="panel-staff">
+        <div class="card">
+          <div class="card-header"><div class="card-title"><span>Admin accounts</span><span>Every active account has full administrator access.</span></div></div>
+          <form id="form-staff">
+            <div class="form-group"><label for="staff-email">Email</label><input type="email" class="form-input" id="staff-email" autocomplete="email" required></div>
+            <div class="form-group"><label for="staff-display-name">Display name</label><input type="text" class="form-input" id="staff-display-name" maxlength="80"></div>
+            <div class="form-group"><label for="staff-password">Temporary password (12 characters minimum)</label><input type="password" class="form-input" id="staff-password" minlength="12" autocomplete="new-password" required></div>
+            <div id="staff-status" role="status" aria-live="polite" style="color: var(--text-muted); font-size: 13px; margin-bottom: 14px;"></div>
+            <button class="btn btn-primary" id="btn-create-staff" type="submit">Create admin account</button>
+          </form>
+        </div>
+        <div class="card"><div id="staff-list">Loading staff accounts...</div></div>
+      </section>
+    </main>
+
+    <!-- Modal: Add Featured Server -->
+    <div class="modal-overlay" id="modal-server">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3 id="server-modal-title">Add Featured Server</h3>
+          <button class="modal-close" id="btn-close-server">✕</button>
+        </div>
+        <form id="form-server">
+          <div id="server-status" role="status" aria-live="polite" style="color: var(--text-muted); font-size: 13px; margin-bottom: 12px;"></div>
+          <div class="form-group">
+            <label>Server Name</label>
+            <input type="text" class="form-input" id="srv-name" placeholder="e.g. Hypixel Network" required>
+          </div>
+          <div class="form-group">
+            <label>Host / IP Address</label>
+            <input type="text" class="form-input" id="srv-host" placeholder="e.g. mc.hypixel.net" required>
+          </div>
+          <div class="form-group">
+            <label>Port</label>
+            <input type="number" class="form-input" id="srv-port" value="25565">
+          </div>
+          <div class="form-group">
+            <label>Tags (Comma separated)</label>
+            <input type="text" class="form-input" id="srv-tags" placeholder="Minigames, Bedwars, PvP">
+          </div>
+          <div class="modal-actions">
+            <button type="submit" class="btn btn-primary" id="btn-save-server">Save Server</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal: Add News -->
+    <div class="modal-overlay" id="modal-news">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3 id="news-modal-title">Publish Launcher News</h3>
+          <button class="modal-close" id="btn-close-news">✕</button>
+        </div>
+        <form id="form-news">
+          <div id="news-status" role="status" aria-live="polite" style="color: var(--text-muted); font-size: 13px; margin-bottom: 12px;"></div>
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" class="form-input" id="news-title" placeholder="e.g. DewClient update released" required>
+          </div>
+          <div class="form-group">
+            <label>Tag</label>
+            <input type="text" class="form-input" id="news-tag" placeholder="UPDATE, EVENT, LAUNCH" value="UPDATE">
+          </div>
+          <div class="form-group">
+            <label>Summary</label>
+            <textarea class="form-input" id="news-summary" rows="3" placeholder="Brief summary shown in launcher feed..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Read More Link URL</label>
+            <input type="url" class="form-input" id="news-url" placeholder="https://dewclient.fun/...">
+          </div>
+          <div class="modal-actions">
+            <button type="submit" class="btn btn-primary" id="btn-save-news">Publish News</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-cosmetics">
+      <div class="modal-box">
+        <div class="modal-header">
+          <div>
+            <h3>Assign Player Cosmetics</h3>
+            <div id="cosmetic-player-label" style="color: var(--text-muted); font-size: 12px; margin-top: 4px;"></div>
+          </div>
+          <button class="modal-close" id="btn-close-cosmetics" type="button" aria-label="Close">✕</button>
+        </div>
+        <form id="form-cosmetics">
+          <div class="form-group">
+            <div class="cosmetic-picker-heading"><label>Skin textures</label><span id="admin-skin-count" class="cosmetic-picker-count">0 selected</span></div>
+            <input class="form-input cosmetic-picker-search" id="admin-skin-search" type="search" placeholder="Search skins..." aria-label="Search skin textures">
+            <div class="cosmetic-picker-list" id="admin-skin-picker" role="group" aria-label="Assign skin textures"></div>
+            <div id="admin-skin-state" style="color: var(--text-muted); font-size: 12px; margin-top: 5px;"></div>
+            <button type="button" class="btn btn-secondary cosmetic-picker-clear" data-clear-picker="skin">Clear skin assignments</button>
+          </div>
+          <div class="form-group">
+            <div class="cosmetic-picker-heading"><label>Cape textures</label><span id="admin-cape-count" class="cosmetic-picker-count">0 selected</span></div>
+            <input class="form-input cosmetic-picker-search" id="admin-cape-search" type="search" placeholder="Search capes..." aria-label="Search cape textures">
+            <div class="cosmetic-picker-list" id="admin-cape-picker" role="group" aria-label="Assign cape textures"></div>
+            <div id="admin-cape-state" style="color: var(--text-muted); font-size: 12px; margin-top: 5px;"></div>
+            <button type="button" class="btn btn-secondary cosmetic-picker-clear" data-clear-picker="cape">Clear cape assignments</button>
+          </div>
+          <div class="form-group">
+            <div class="cosmetic-picker-heading"><label>Wing textures</label><span id="admin-elytra-count" class="cosmetic-picker-count">0 selected</span></div>
+            <input class="form-input cosmetic-picker-search" id="admin-elytra-search" type="search" placeholder="Search wings..." aria-label="Search wing textures">
+            <div class="cosmetic-picker-list" id="admin-elytra-picker" role="group" aria-label="Assign wing textures"></div>
+            <div id="admin-elytra-state" style="color: var(--text-muted); font-size: 12px; margin-top: 5px;"></div>
+            <button type="button" class="btn btn-secondary cosmetic-picker-clear" data-clear-picker="elytra">Clear wing assignments</button>
+          </div>
+          <div id="admin-cosmetic-status" role="status" aria-live="polite" style="color: var(--text-muted); font-size: 13px; margin-bottom: 14px;"></div>
+          <div class="modal-actions">
+            <button type="submit" class="btn btn-primary" id="btn-save-cosmetics">Save Assignments</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/dashboard.js?v=1.0.1-r1"></script>
+</body>
+</html>

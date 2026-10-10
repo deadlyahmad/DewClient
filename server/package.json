@@ -1,0 +1,17 @@
+{
+  "name": "@dewclient/server",
+  "version": "1.0.1",
+  "description": "DewClient Central Management & Cosmetics Backend Server",
+  "main": "src/index.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.mjs",
+    "dev": "node --watch src/index.mjs",
+    "bootstrap-admin": "node src/bootstrapAdmin.mjs",
+    "discord:publish-link-button": "node scripts/publishDiscordLinkMessage.mjs",
+    "discord:set-endpoint": "node scripts/setDiscordInteractionsEndpoint.mjs"
+  },
+  "keywords": ["dewclient", "minecraft", "launcher-server", "cosmetics", "presence"],
+  "author": "DewClient Team",
+  "license": "MIT"
+}

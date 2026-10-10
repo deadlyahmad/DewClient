@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "dewcosmetics",
+  "version": "${version}",
+  "name": "DewCosmetics",
+  "description": "DewClient cosmetics bridge for Minecraft ${minecraft_version}.",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "fun.dewclient.cosmetics.DewCosmeticsMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.3",
+    "minecraft": "${minecraft_version}"
+  }
+}

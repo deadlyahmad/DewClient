@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "dewcosmetics",
+  "version": "${version}",
+  "name": "DewCosmetics",
+  "description": "DewClient cosmetics and branded player tags.",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "fun.dewclient.cosmetics.DewCosmeticsMod263"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "dewcosmetics.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "26.3",
+    "fabric-api": "*",
+    "java": ">=25"
+  }
+}

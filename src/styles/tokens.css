@@ -1,0 +1,114 @@
+/* DewClient desktop design tokens. The two themes share the same geometry and interaction rules. */
+:root,
+[data-theme="black"] {
+  color-scheme: dark;
+  --bg-app: #0B0D10;
+  --bg-sidebar: #101419;
+  --bg-header: rgba(13, 16, 20, 0.92);
+  --bg-surface: #14181D;
+  --bg-surface-elevated: #1C2229;
+  --bg-surface-glass: rgba(20, 24, 29, 0.9);
+  --bg-surface-hover: #252D35;
+  --bg-input: #0D1115;
+  --bg-card: #14191F;
+  --bg-card-inner: #101419;
+  --bg-modal: #171D23;
+  --modal-backdrop: rgba(2, 5, 8, 0.72);
+  --bg-dropdown: #171D23;
+  --backdrop-overlay: rgba(11, 13, 16, 0.94);
+  --backdrop-vignette: radial-gradient(ellipse at 82% 0%, rgba(112, 152, 118, 0.1), transparent 36%), #0B0D10;
+
+  --border-subtle: rgba(224, 235, 242, 0.09);
+  --border-medium: rgba(224, 235, 242, 0.16);
+  --border-focus: #C3F56B;
+  --border-glow: rgba(195, 245, 107, 0.28);
+
+  --accent-primary: #C3F56B;
+  --accent-primary-hover: #D2FA8D;
+  --accent-primary-fg: #10160A;
+  --accent-primary-glow: rgba(195, 245, 107, 0.16);
+  --accent-gradient: linear-gradient(135deg, #D5FA8C 0%, #B7E950 100%);
+  --accent-emerald: #58D8A2;
+  --accent-emerald-glow: rgba(88, 216, 162, 0.17);
+  --accent-violet: #B6A0FF;
+  --accent-violet-glow: rgba(182, 160, 255, 0.18);
+  --accent-amber: #FFD07A;
+  --accent-crimson: #FF858B;
+
+  --text-primary: #F5F7FA;
+  --text-secondary: #B8C3CC;
+  --text-muted: #9AA6B2;
+  --text-dim: #84919D;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.42);
+  --shadow-glow: 0 0 28px rgba(195, 245, 107, 0.11);
+  --inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.055);
+  --scrollbar-thumb: rgba(224, 235, 242, 0.17);
+  --scrollbar-thumb-hover: rgba(224, 235, 242, 0.28);
+}
+
+[data-theme="white"] {
+  color-scheme: light;
+  --bg-app: #F2F5F4;
+  --bg-sidebar: #E9EFEC;
+  --bg-header: rgba(248, 250, 249, 0.94);
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FFFFFF;
+  --bg-surface-glass: rgba(255, 255, 255, 0.94);
+  --bg-surface-hover: #E9EFEC;
+  --bg-input: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-card-inner: #F6F8F7;
+  --bg-modal: #FFFFFF;
+  --modal-backdrop: rgba(19, 31, 26, 0.34);
+  --bg-dropdown: #FFFFFF;
+  --backdrop-overlay: rgba(242, 245, 244, 0.95);
+  --backdrop-vignette: radial-gradient(ellipse at 82% 0%, rgba(74, 125, 94, 0.08), transparent 36%), #F2F5F4;
+
+  --border-subtle: rgba(22, 39, 31, 0.09);
+  --border-medium: rgba(22, 39, 31, 0.16);
+  --border-focus: #245C45;
+  --border-glow: rgba(36, 92, 69, 0.22);
+
+  --accent-primary: #245C45;
+  --accent-primary-hover: #184A35;
+  --accent-primary-fg: #FFFFFF;
+  --accent-primary-glow: rgba(36, 92, 69, 0.15);
+  --accent-gradient: linear-gradient(135deg, #2F7457 0%, #245C45 100%);
+  --accent-emerald: #08744A;
+  --accent-emerald-glow: rgba(8, 116, 74, 0.12);
+  --accent-violet: #633BC5;
+  --accent-violet-glow: rgba(99, 59, 197, 0.12);
+  --accent-amber: #8A5200;
+  --accent-crimson: #B42332;
+
+  --text-primary: #111820;
+  --text-secondary: #3E4A53;
+  --text-muted: #58636E;
+  --text-dim: #68757F;
+
+  --shadow-sm: 0 2px 8px rgba(20, 40, 30, 0.055);
+  --shadow-md: 0 12px 32px rgba(20, 40, 30, 0.09);
+  --shadow-lg: 0 24px 60px rgba(20, 40, 30, 0.14);
+  --shadow-glow: 0 0 24px rgba(36, 92, 69, 0.09);
+  --inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  --scrollbar-thumb: rgba(22, 39, 31, 0.2);
+  --scrollbar-thumb-hover: rgba(22, 39, 31, 0.32);
+}
+
+:root {
+  --radius-xs: 5px;
+  --radius-sm: 9px;
+  --radius-md: 13px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  --focus-ring: 0 0 0 3px var(--accent-primary-glow);
+  --surface-glass-border: color-mix(in srgb, var(--border-medium) 82%, transparent);
+  --elevation-interactive: 0 8px 24px color-mix(in srgb, var(--accent-primary-glow) 70%, transparent);
+  --transition-fast: 150ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  --transition-normal: 230ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  --transition-spring: 300ms cubic-bezier(.2, .8, .2, 1);
+}

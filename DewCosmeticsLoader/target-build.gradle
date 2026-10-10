@@ -1,0 +1,89 @@
+version = mod_version
+group = 'fun.dewclient'
+base { archivesName = "dewcosmetics-${minecraft_version}" }
+
+repositories { mavenCentral() }
+
+dependencies {
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    if (mappings_mode == 'official') mappings loom.officialMojangMappings()
+    if (mappings_mode == 'official') {
+        modImplementation "net.fabricmc:fabric-loader:${loader_version}"
+        modImplementation 'net.fabricmc:sponge-mixin:0.15.5+mixin.0.8.7'
+        if (minecraft_version == '1.21.11') {
+            modImplementation "net.fabricmc.fabric-api:fabric-lifecycle-events-v1:${lifecycle_api_version}"
+        } else {
+            modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+        }
+    } else {
+        implementation "net.fabricmc:fabric-loader:${loader_version}"
+        implementation 'net.fabricmc:sponge-mixin:0.15.5+mixin.0.8.7'
+        implementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+    }
+}
+
+loom {
+    splitEnvironmentSourceSets()
+    mods {
+        "dewcosmetics" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java.srcDirs = ['../src/main/java']
+        resources.srcDirs = ['../src/main/resources']
+        resources.exclude 'fabric.mod.json'
+    }
+    client {
+        java.srcDirs = ['../src/commonClient/java', 'src/target/java']
+        resources.srcDirs = ['../src/commonClient/resources', 'src/target/resources']
+    }
+}
+
+java { withSourcesJar() }
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = Integer.parseInt(java_version)
+}
+
+tasks.withType(org.gradle.language.jvm.tasks.ProcessResources).configureEach {
+    inputs.properties([version: project.version, minecraft_version: minecraft_version, java_version: java_version, mixin_java_level: mixin_java_level])
+    filesMatching(['fabric.mod.json', 'dewcosmetics.mixins.json']) {
+        expand version: project.version, minecraft_version: minecraft_version, java_version: java_version, mixin_java_level: mixin_java_level
+    }
+}
+
+tasks.register('stageVersionJar', Copy) {
+    dependsOn tasks.named('jar')
+    from tasks.named('jar')
+    into layout.projectDirectory.dir('../output-jars')
+    rename { "dewcosmetics-${minecraft_version}-${project.version}.jar" }
+    doLast {
+        def artifactName = "dewcosmetics-${minecraft_version}-${project.version}.jar"
+        def outputDir = destinationDir.toPath()
+        def artifact = outputDir.resolve(artifactName).toFile()
+        def apiConfiguration = configurations.detachedConfiguration(
+            dependencies.create("net.fabricmc.fabric-api:fabric-api:${fabric_api_version}")
+        )
+        apiConfiguration.transitive = false
+        def apiFile = apiConfiguration.singleFile
+        def apiTarget = outputDir.resolve(apiFile.name).toFile()
+        java.nio.file.Files.copy(apiFile.toPath(), apiTarget.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+        def hash = { file -> java.security.MessageDigest.getInstance('SHA-256').digest(file.bytes).encodeHex().toString() }
+        def manifestFile = layout.projectDirectory.file('../versions.json').asFile
+        def manifest = new groovy.json.JsonSlurper().parse(manifestFile)
+        manifest.versions[minecraft_version] = [
+            loader: 'fabric', loaderVersion: loader_version, mappings: mappings_mode,
+            modVersion: project.version.toString(), artifact: "output-jars/${artifactName}", sha256: hash(artifact),
+            dependencies: [[projectId: 'fabric-api', artifact: "output-jars/${apiFile.name}", sha256: hash(apiTarget)]],
+            minModProtocol: 1, maxModProtocol: 1, status: 'built', supportVerified: false
+        ]
+        manifestFile.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(manifest)) + '\n'
+    }
+}
+
+tasks.named('build').configure { finalizedBy tasks.named('stageVersionJar') }

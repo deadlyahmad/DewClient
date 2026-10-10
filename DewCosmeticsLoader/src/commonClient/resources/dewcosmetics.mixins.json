@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "fun.dewclient.cosmetics.mixin",
+  "compatibilityLevel": "${mixin_java_level}",
+  "client": ["AbstractClientPlayerMixin"],
+  "injectors": { "defaultRequire": 1 }
+}

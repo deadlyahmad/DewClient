@@ -1,0 +1,25 @@
+[Unit]
+Description=DewClient API and admin dashboard
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=dewclient
+Group=dewclient
+WorkingDirectory=/opt/dewclient/server
+EnvironmentFile=/etc/dewclient/server.env
+ExecStart=/usr/bin/node /opt/dewclient/server/src/index.mjs
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=20
+KillSignal=SIGTERM
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/dewclient/releases
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target

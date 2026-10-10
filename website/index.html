@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a0c">
+  <meta name="robots" content="index,follow">
+  <meta name="description" content="DewClient is a Windows Minecraft launcher with Microsoft and Discord sign-in, profile management, and DewCosmetics support for Minecraft 1.21.4, 1.21.8, 1.21.11, 26.2, and 26.3.">
+  <link rel="canonical" href="https://dewclient.fun/">
+  <meta property="og:title" content="DewClient — Minecraft launcher for Windows">
+  <meta property="og:description" content="Manage Microsoft, Discord, and offline profiles, Minecraft instances, and eligible cosmetics in one Windows launcher.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dewclient.fun/">
+  <title>DewClient — Minecraft Launcher</title>
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=dewclient-ico-20261008">
+  <link rel="stylesheet" href="./css/style.css?v=20261008.3">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./index.html" aria-label="DewClient home">
+        <img src="./favicon.ico?v=dewclient-ico-20261008" alt="" width="38" height="38">
+        <span><strong>DewClient</strong><small>OFFICIAL WEBSITE</small></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Open navigation"><span></span><span></span></button>
+      <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="./news.html">News</a>
+        <a href="#download">Download</a>
+        <a href="#faq">FAQ</a>
+        <a href="./privacy.html">Privacy</a>
+        <a href="./terms.html">Terms</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch color theme"><span aria-hidden="true">◐</span></button>
+        <a class="button button-small button-light" href="#download">Get DewClient <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero page-wrap">
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span>Windows 10/11 · 64-bit</span></div>
+        <h1>Minecraft Java<br><span>launcher.</span></h1>
+        <p class="hero-lede">Sign in with Microsoft or Discord, manage separate game instances, and choose eligible cosmetics from one launcher.</p>
+        <div class="hero-actions">
+          <a class="button button-light" id="heroDownload" data-download href="https://server.dewclient.fun/downloads/DewClient-1.0.1.exe"><span class="download-label">Download for Windows</span><span class="download-icon" aria-hidden="true">↓</span><span class="download-spinner" aria-hidden="true"></span></a>
+          <a class="button button-quiet" href="https://discord.gg/uXs2YD4D6H" target="_blank" rel="noopener noreferrer">Join the community <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="download-status" id="heroDownloadStatus" role="status" aria-live="polite"></p>
+        <p class="hero-note">Minecraft Java Edition · Windows 10/11</p>
+      </div>
+      <div class="hero-visual reveal" aria-label="DewClient launcher preview">
+        <div class="visual-glow"></div>
+        <div class="launcher-window">
+          <div class="window-top"><div class="window-controls"><i></i><i></i><i></i></div><span>DewClient</span><span aria-hidden="true"></span></div>
+          <div class="window-content">
+            <aside class="window-sidebar">
+              <div class="window-user"><img src="./favicon.ico?v=dewclient-ico-20261008" alt=""><span><b>Profiles</b><small>Microsoft · Discord</small></span></div>
+              <span class="side-item active"><i>◈</i> Overview</span>
+              <span class="side-item"><i>▱</i> Instances</span>
+              <span class="side-item"><i>✦</i> Cosmetics</span>
+              <span class="side-item"><i>⚙</i> Settings</span>
+            </aside>
+            <div class="window-main">
+              <div class="window-heading"><span>SELECTED INSTANCE</span><b>Minecraft 26.3</b></div>
+              <div class="instance-card"><div class="grass-block" aria-hidden="true"><span></span></div><div><small>FABRIC · MOD 0.4.0</small><strong>DewCosmetics</strong><span>Skins · Capes · Wings</span></div></div>
+              <div class="window-bottom"><span>Microsoft profile</span><span class="play-pill">▶ &nbsp;Play</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-strip page-wrap reveal" aria-label="DewClient highlights">
+      <span>Minecraft Java Edition</span><i></i><span>Microsoft and Discord profiles</span><i></i><span>DewCosmetics · five Fabric versions</span><i></i><span>Free to download</span>
+    </section>
+
+    <section class="section page-wrap" id="features">
+      <div class="section-heading reveal"><span class="section-kicker">FEATURES</span><h2>Manage your Minecraft setup.</h2><p>Keep profiles, game instances, and eligible cosmetics in the same launcher.</p></div>
+      <div class="feature-grid">
+        <article class="feature-card reveal"><span class="feature-icon">◉</span><span class="feature-number">PROFILES</span><h3>Microsoft, Discord, or offline</h3><p>Use separate profiles for each sign-in type. Offline profiles stay local and do not receive cloud cosmetic claims.</p></article>
+        <article class="feature-card reveal"><span class="feature-icon">▱</span><span class="feature-number">INSTANCES</span><h3>Separate game setups</h3><p>Create instances for different Minecraft versions and loaders, with their own game files and mods.</p></article>
+        <article class="feature-card feature-card-highlight reveal"><span class="feature-icon">✦</span><span class="feature-number">DEWCOSMETICS 0.4.0</span><h3>Skins, capes, and wings</h3><p>Choose eligible cosmetics in the launcher. Supported DewCosmetics clients can see each other's equipped cosmetics across five Fabric versions.</p><span class="card-footnote">1.21.4 · 1.21.8 · 1.21.11 · 26.2 · 26.3</span></article>
+      </div>
+    </section>
+
+    <section class="release-section">
+      <div class="release-inner page-wrap">
+        <div class="release-mark reveal"><span>0.4.0</span><i>DEWCOSMETICS</i></div>
+        <div class="release-copy reveal"><span class="section-kicker">FABRIC · FIVE MINECRAFT VERSIONS</span><h2>One cosmetics<br>community.</h2><p>Players running DewCosmetics on 1.21.4, 1.21.8, 1.21.11, 26.2, or 26.3 can sync equipped skins, capes, and wings across those versions.</p><a class="text-link" href="./news.html">Read the update <span aria-hidden="true">→</span></a></div>
+      </div>
+    </section>
+
+    <section class="section page-wrap download-section" id="download">
+      <div class="download-card reveal">
+        <div><span class="section-kicker">WINDOWS INSTALLER</span><h2>Download DewClient</h2><p>Installer for Windows 10/11, 64-bit.</p><span class="download-meta" id="downloadMeta">Windows 10/11 · 64-bit</span></div>
+        <a class="button button-light button-download" id="downloadButton" data-download href="https://server.dewclient.fun/downloads/DewClient-1.0.1.exe"><span class="download-label">Download installer</span><span class="download-icon" aria-hidden="true">↓</span><span class="download-spinner" aria-hidden="true"></span></a>
+      </div>
+      <p class="download-status download-status-center" id="downloadStatus" role="status" aria-live="polite"></p>
+      <p class="download-footnote">By using DewClient, you agree to our <a href="./terms.html">Terms of Service</a> and acknowledge the <a href="./privacy.html">Privacy Policy</a>.</p>
+    </section>
+
+    <section class="section page-wrap faq-section" id="faq">
+      <div class="section-heading reveal"><span class="section-kicker">SUPPORT</span><h2>Frequently asked questions</h2></div>
+      <div class="faq-list reveal">
+        <details><summary>Which Minecraft versions support DewCosmetics?</summary><p>DewCosmetics 0.4.0 supports Fabric on Minecraft 1.21.4, 1.21.8, 1.21.11, 26.2, and 26.3. The launcher installs or updates the matching mod when preparing a supported instance. Cross-version cosmetics appear between players running DewCosmetics on those versions.</p></details>
+        <details><summary>How do I use a claimed cape?</summary><p>Claim the free cape from Cosmetics, then choose Equip. The launcher shows which cape is active and syncs the selection to the game.</p></details>
+        <details><summary>How does sign-in work?</summary><p>Microsoft sign-in uses Microsoft’s official flow. Discord sign-in creates a separate DewClient profile. Linking Discord to a Microsoft profile verifies community membership; it does not grant access to the other account.</p></details>
+        <details><summary>Is DewClient free?</summary><p>Yes. DewClient is free to download and use. Minecraft must be owned separately for Microsoft profiles.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner page-wrap">
+      <div class="footer-brand"><a class="brand" href="./index.html"><img src="./favicon.ico?v=dewclient-ico-20261008" alt="" width="36" height="36"><span><strong>DewClient</strong><small>OFFICIAL WEBSITE</small></span></a><p>Minecraft Java launcher for profiles, instances, and cosmetics.</p></div>
+      <div class="footer-links"><div><b>Explore</b><a href="#features">Features</a><a href="./news.html">News</a><a href="#download">Download</a></div><div><b>Information</b><a href="./privacy.html">Privacy Policy</a><a href="./terms.html">Terms of Service</a><a href="https://discord.gg/uXs2YD4D6H" target="_blank" rel="noopener noreferrer">Discord community</a></div></div>
+      <div class="footer-bottom"><span>© <span id="year">2026</span> DewClient</span><span>DewClient is an independent project and is not affiliated with Mojang Studios or Microsoft.</span></div>
+    </div>
+  </footer>
+  <script src="./js/main.js?v=20261008.3" defer></script>
+</body>
+</html>

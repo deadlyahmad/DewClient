@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-electron/
+out/
+release/
+coverage/
+**/.gradle/
+**/build/
+DewCosmeticsLoader/output-jars/
+DewClient-Source.zip
+
+# Local environment / secrets
+.env
+.env.*
+!.env.example
+
+# Logs and temporary files
+*.log
+test-output.txt
+temp-dest/
+vite.config.ts.timestamp-*.mjs
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+microsoft-official-auth-sample-code.zip
+ms-identity-javascript-nodejs-desktop-main/
+dist-website/
+dist-website.zip
+dist-server/
+dist-server.zip
+
+
+# Server runtime data
+server/data/*.json
+server/data/assets/*
+!server/data/.gitkeep
+!server/data/assets/.gitkeep
+
